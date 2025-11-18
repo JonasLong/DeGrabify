@@ -1,0 +1,17 @@
+h1 {
+    background-color: red;
+}
+
+a {
+    background-color: lightgreen;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+div {
+    padding: 13px 7px;
+}
+
+h2 {
+    margin-bottom: 0px;
+}
