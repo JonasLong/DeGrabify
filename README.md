@@ -23,13 +23,14 @@
  
 
 # Roadmap
- - Properly handle list formatting for the different services
+ - Wrap for Docker
+ - Test uBO/uBL subscriptions on an actual domain
+ - Use environment variables for base domain and proxy level
+ - Abstract list formatting into the config/.env
  - Double check header specs for ublock and ublacklist
    - any missing fields?
    - figure out if "access time" field ruins caching
- - Use environment variables for base domain and proxy level
  - Implement cron scheduling
- - Wrap for Docker
  - Integrate with nginx proxy mgr
  - Write onboarding instructions
  - Use Flask in production
