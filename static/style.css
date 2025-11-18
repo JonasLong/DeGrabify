@@ -3,9 +3,16 @@ h1 {
 }
 
 a {
-    background-color: lightgreen;
     padding: 7px;
     border-radius: 10px;
+}
+
+.sub {
+    background-color: lightcoral;
+}
+
+.local {
+    background-color: lightgreen;
 }
 
 div {
