@@ -12,6 +12,7 @@
 # Setup
  ## Server
   TODO
+  
   TLDR: docker pull, docker compose up, forward server through nginx, get the forwarded URL, store it as the base domain in the config, set the proxy level (also in config)
  ## Client
   To install with your adblock or Hosts file
@@ -24,8 +25,8 @@
 # Roadmap
  - Properly handle list formatting for the different services
  - Double check header specs for ublock and ublacklist
-  - any missing fields?
-  - figure out if "access time" field ruins caching
+   - any missing fields?
+   - figure out if "access time" field ruins caching
  - Use environment variables for base domain and proxy level
  - Implement cron scheduling
  - Wrap for Docker
