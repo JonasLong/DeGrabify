@@ -3,6 +3,7 @@ from tinydb import TinyDB, Query
 from tinydb.storages import JSONStorage
 from tinydb.middlewares import CachingMiddleware
 import time
+from argparse import ArgumentParser
 
 site = "https://grabify.link/api/domains?r=124"
 
@@ -16,6 +17,14 @@ headers = requests.request(method="get",url=site,headers={
     })
 
 def site_main():
+    # Parse commandline args
+    parser = ArgumentParser(description="DeGrabify webcrawler")
+    parser.add_argument("-d", "--database", dest="database",
+                        help="path to the database", metavar="FILE", default="sites.json", required=True)
+    args = parser.parse_args()
+    db_path = args.database
+
+    # Loop fetching domain list
     while True:
         print("Waiting for next cron interval...")
         # TODO wait for cronjob to tick
@@ -23,7 +32,7 @@ def site_main():
         sites=get_domains()
         if sites is not None:
             print("Got domains")
-            notify(sites)
+            store_sites(sites, db_path)
         else:
             print("Failed to fetch domains from {site}")
         return #TODO
@@ -36,11 +45,11 @@ def get_domains():
         return None
     return resp.json()
 
-def notify(sites):
-    print(f"Saving {len(sites)} domains to database")
+def store_sites(sites, db_path:str):
+    print(f"Saving {len(sites)} domains to database at path \"{db_path}\"")
 
     with TinyDB(
-        'sites.json', 
+        db_path, 
         storage=CachingMiddleware(JSONStorage), 
         sort_keys=True, 
         indent=4, 

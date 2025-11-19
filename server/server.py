@@ -5,17 +5,29 @@ from tinydb import TinyDB, Query
 from tinydb.storages import JSONStorage
 from tinydb.middlewares import CachingMiddleware
 import time
-
-# set up the TinyDB (readonly)
-db = TinyDB('sites.json', storage=CachingMiddleware(JSONStorage), sort_keys=True, indent=4, separators=(',', ': '))
-Domain = Query()
+from argparse import ArgumentParser
 
 # set up Flask
 app = Flask(__name__)
+
+# Parse command line args
+parser = ArgumentParser(description="Flask server for DeGrabify")
+parser.add_argument("-d", "--database", dest="database",
+                    help="path to the database", metavar="FILE", default="sites.json", required=True)
+parser.add_argument("-p", "--proxy-lvl", dest="proxy_lvl",
+                    help="level of reverse proxies for Flask ProxyFix middleware", metavar="NUM", default="0", required=True)
+args = parser.parse_args()
+app.config["db"]=args.database
+proxy_lvl = args.proxy_lvl
+
 # TODO handle reverse proxy
 #app.wsgi_app = ProxyFix(
 #    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
 #)
+
+# set up the TinyDB (readonly)
+db = TinyDB(app.config["db"], storage=CachingMiddleware(JSONStorage), sort_keys=True, indent=4, separators=(',', ': '))
+Domain = Query()
 
 
 @app.route("/")
@@ -55,7 +67,7 @@ def format_list(site_list: list[str], comment_chr: str, fmtstr: str, full_header
     utime = update_time()
 
     if utime is None:
-        return f"{comment_chr} No updates have run yet or the database has been cleared. Contact the administrator."
+        return f"{comment_chr} No updates have run yet or the database has been cleared. Contact the administrator.\n{comment_chr} DB path: {app.config["db"]}"
 
     if full_header:
         comments = f"""Title: Grabify Domain List
@@ -94,19 +106,15 @@ def get_filter_list() -> list[str]:
     sites: list[str] = [
         doc["Domain"] for doc in iter(db.table("sites"))
     ]
-
-    updateTable = db.table("lastUpdated").all()
-
-    if len(updateTable) != 1:
-        return ["# No updates have run yet or the database has been cleared. Contact the administrator."]
-    else:
-        # return the list of domains
-        return sites
+    # return the list of domains
+    return sites
 
 
 if __name__ == "__main__":
-    print("This script should be run with Flask. Printing filter list for debugging purposes...")
-    response=ublacklist()
-    print("\nReturned page data:\n--------------")
-    print(bytes.decode(response.data))
-    print("--------------")
+    #print("This script should be run with Flask. Printing filter list for debugging purposes...")
+    #response=ublacklist()
+    #print("\nReturned page data:\n--------------")
+    #print(bytes.decode(response.data))
+    #print("--------------")
+    app.run(host="0.0.0.0")
+ 

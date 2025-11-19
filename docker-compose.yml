@@ -1,0 +1,31 @@
+services:
+  server:
+    #image: 
+    build: 
+      dockerfile: .docker/server/Dockerfile
+      context: .
+    ports:
+      - "5000:5000"
+    #networks:
+    #  default
+    command: -d /data/sites.json -p 0
+    volumes:
+      - db:/data
+    #environment:
+
+  crawler:
+    #image:
+    build: 
+      dockerfile: .docker/crawler/Dockerfile
+      context: .
+    command: -d /data/sites.json
+    volumes:
+      - db:/data
+
+volumes:
+  db:
+
+#networks:
+#  default:
+#    name: default
+#    external: true
