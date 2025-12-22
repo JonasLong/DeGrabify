@@ -23,7 +23,6 @@
  
 
 # Roadmap
- - Test uBO/uBL subscriptions on an actual domain
  - Use environment variables for base domain and proxy level
  - Abstract list formatting into the config/.env
  - Double check header specs for ublock and ublacklist

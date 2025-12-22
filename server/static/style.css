@@ -28,7 +28,7 @@ p.note {
 
 span.note {
     width: 40%;
-    display:inline-block;
+    display: inline-block;
     padding-left: 10px;
 }
 
@@ -40,4 +40,16 @@ html div {
 
 h2 {
     margin-bottom: 0px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+footer div {
+    width: 100%;
+    padding: 10px;
 }
