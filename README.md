@@ -1,13 +1,15 @@
 # DeGrabify
- This project is made up of two parts:
- - A client which periodically retrieves a list of domains offered by the IP Logger service Grabify
- - A webserver which provides this list of domains to adblock clients
+  Provides an up-to-date list of Grabify domains, for use by adblockers.\
+  The goal of this project is to reduce the risk of being doxxed by unknowingly clicking on IP logger links.\
+  This project is not associated with Grabify.
 
- The goal of this project is to reduce the risk of being doxxed by unknowingly clicking on IP logger links.
+  This project is made up of two parts:
+  - A client which periodically retrieves a list of domains offered by the IP Logger service Grabify
+  - A webserver which provides this list of domains to adblock clients
 
- Compatible with uBlock Origin, uBlacklist, and Hosts files
-
- Uses Flask, Python requests, and TinyDB
+  Compatible with uBlock Origin, uBlacklist, and Hosts files\
+  Easily self-hosted with Docker or compatible virtualization\
+  Uses Flask, Python requests, and TinyDB
 
 # Setup
 
