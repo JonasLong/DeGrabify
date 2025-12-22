@@ -20,27 +20,26 @@ def site_main():
     # Parse commandline args
     parser = ArgumentParser(description="DeGrabify webcrawler")
     parser.add_argument("-d", "--database", dest="database",
-                        help="path to the database", metavar="FILE", default="sites.json", required=True)
+                        help="path to the database", metavar="FILE", default="sites.json")
+    parser.add_argument("-c", "--cron", dest="cron",
+                        help="cronjob for the crawler (default once per day @ noon)", metavar="CRON", default="0 12 * * *")
     args = parser.parse_args()
-    db_path = args.database
+    db_path = args.database.strip()
+    cron = args.cron
 
     # Loop fetching domain list
-    while True:
-        print("Waiting for next cron interval...")
-        # TODO wait for cronjob to tick
-        print("Fetching domains...")
-        sites=get_domains()
-        if sites is not None:
-            print("Got domains")
-            store_sites(sites, db_path)
-        else:
-            print("Failed to fetch domains from {site}")
-        return #TODO
+    print("Fetching domains...")
+    sites=get_domains()
+    if sites is not None:
+        print("Got domains")
+        store_sites(sites, db_path)
+    else:
+        print("Failed to fetch domains from {site}")
 
 def get_domains():
     resp = requests.get(site)
     if not resp.ok:
-        print("Error:",resp.status_code)
+        print(f"Error fetching list from '{site}':\n",resp.status_code)
         #print(resp.text)
         return None
     return resp.json()
@@ -74,4 +73,6 @@ def store_sites(sites, db_path:str):
         
 
 if __name__ == "__main__":
+    print("Crawler init")
     site_main()
+    print()

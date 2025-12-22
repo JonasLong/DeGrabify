@@ -1,24 +1,28 @@
 services:
   server:
-    #image: 
-    build: 
-      dockerfile: .docker/server/Dockerfile
-      context: .
-    ports:
-      - "5000:5000"
-    #networks:
-    #  default
-    command: -d /data/sites.json -p 0
-    volumes:
-      - db:/data
-    #environment:
+   #image: 
+   #environment:
+   # - TZ=America/Denver
+   build:
+     dockerfile: .docker/server/Dockerfile
+     context: .
+   ports:
+     - "5000:5000"
+   #networks:
+   #  default
+   command: -d /data/sites.json -p 0
+   volumes:
+     - db:/data
 
   crawler:
     #image:
+    #environment:
+    # - TZ=America/Denver
     build: 
       dockerfile: .docker/crawler/Dockerfile
       context: .
-    command: -d /data/sites.json
+    command: "'0 12 * * *' -d /data/sites.json" # Run on a schedule
+    #command: "once -d /data/sites.json" # Run once
     volumes:
       - db:/data
 

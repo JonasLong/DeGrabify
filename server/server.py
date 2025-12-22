@@ -13,9 +13,9 @@ app = Flask(__name__)
 # Parse command line args
 parser = ArgumentParser(description="Flask server for DeGrabify")
 parser.add_argument("-d", "--database", dest="database",
-                    help="path to the database", metavar="FILE", default="sites.json", required=True)
+                    help="path to the database", metavar="FILE", default="sites.json")
 parser.add_argument("-p", "--proxy-lvl", dest="proxy_lvl",
-                    help="level of reverse proxies for Flask ProxyFix middleware", metavar="NUM", default="0", required=True)
+                    help="level of reverse proxies for Flask ProxyFix middleware", metavar="NUM", default="0")
 args = parser.parse_args()
 app.config["db"]=args.database
 proxy_lvl = args.proxy_lvl

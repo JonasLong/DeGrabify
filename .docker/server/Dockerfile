@@ -3,7 +3,6 @@ FROM python:3
 EXPOSE 5000/tcp
 
 ENV SCRIPT_ROOT=/var/www
-ENV DB_PATH=/data/sites.json
 #ENV FLASK_APP=${SCRIPT_ROOT}/server/server.py
 
 RUN apt-get update
@@ -17,3 +16,4 @@ ADD server/templates/ ./templates/
 ADD server/static/ ./static/
 
 ENTRYPOINT ["python", "-u", "server.py"]
+#args passed directly to entrypoint
