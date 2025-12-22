@@ -18,9 +18,11 @@ services:
     #image:
     #environment:
     # - TZ=America/Denver
-    build: 
+    build:
       dockerfile: .docker/crawler/Dockerfile
       context: .
+    # By default, the crawler runs a cron job once a day at noon to update the list of domains.
+    # You can change the cron, or run only once on container start
     command: "'0 12 * * *' -d /data/sites.json" # Run on a schedule
     #command: "once -d /data/sites.json" # Run once
     volumes:

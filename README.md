@@ -10,13 +10,44 @@
  Uses Flask, Python requests, and TinyDB
 
 # Setup
+
+  TLDR: `docker pull`, `docker compose up`. For reverse proxy, forward the server through nginx/caddy/etc, get the forwarded URL, store it as the base domain in server.py. In the docker-compose, set the proxy level `-p`, disable the exposed port, and connect the server to your bridge network.
+
  ## Server
-  TODO
+  - Clone this repository
+    - `git clone https://github.com/JonasLong/DeGrabify`
+    - `cd DeGrabify`
+  - Consider using a reverse proxy as described [below](#run-behind-a-reverse-proxy)
+  - Configure the container in `docker-compose.yml`
+  - `docker compose up`
+  - Continue to the [Client section](#client)
+
+  ## Updating
+  - `git fetch`
+  - `git pull`
+    - You may need to `git stash` if you've made changes to the config, then merge your stashed changes into main
+  - `docker compose up --build`
+
+  ## Run behind a reverse proxy
+    - Change the `-p` value in the `commands` section of the server config from `0` to `1`
+    - Uncomment both `networks:` sections in the compose file. Change the `name: default` value to the name of your bridge network
+      - This will ensure that the server is connected to the same [external bridge network](https://docs.docker.com/compose/how-tos/networking/) that your reverse proxy is running on.
+    - Comment out the `ports:` section
+    - Change the `base_domain` option in server/server.py from `http://127.0.0.1:5000` to the address your server will be hosted on e.g. `https://degrab.example.com`. If this is set incorrectly, the "Subscribe" buttons won't work but nothing else will be affected.
+    - Configure your reverse proxy
+      - scheme: `http`
+      - domain: `degrabify-server-1`
+      - port: `5000`
+
+  ## Development
+    - Clone this repository
+      - `git clone https://github.com/JonasLong/DeGrabify`
+      - `cd DeGrabify`
+    - Run like a normal docker container, but use `docker compose up --build` to rebuild any file changes
   
-  TLDR: docker pull, docker compose up, forward server through nginx, get the forwarded URL, store it as the base domain in the config, set the proxy level (also in config)
  ## Client
-  To install with your adblock or Hosts file
-  - Navigate to the web address of the server
+  To install with your adblock or Hosts file:
+  - Navigate to the webserver address in a browser
   - Click the relevant subscribe link, or follow the instructions in [uBlockOrigin-HUGE-AI-Blocklist](https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist) for the provided URLs.
   - Most likely you'll go to uBlock or uBlacklist and import a filter, passing it the URL
   - Don't copy-paste the list of domains into your filter list- it won't auto-update as the grabify domains change 
@@ -28,10 +59,7 @@
  - Double check header specs for ublock and ublacklist
    - any missing fields?
    - figure out if "access time" field ruins caching
- - Integrate with nginx proxy mgr
- - Write onboarding instructions
  - Use Flask in production
- - Refactor commenting/header choice in server.py
  - Pretty up the homepage
  - Better disguise crawler
  - See if the "r" param in the URL changes over time as a revision #
