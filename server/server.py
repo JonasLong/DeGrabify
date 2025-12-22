@@ -75,6 +75,7 @@ Expires: 1 day
 Description: Dynamically updated list of in-use Grabify domains, to block IP grabbers
 Last modified: {utime}
 Accessed at: {access_time}
+Homepage: https://github.com/JonasLong/DeGrabify
 
 Enjoy!
 """

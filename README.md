@@ -23,20 +23,20 @@
  
 
 # Roadmap
- - Wrap for Docker
  - Test uBO/uBL subscriptions on an actual domain
  - Use environment variables for base domain and proxy level
  - Abstract list formatting into the config/.env
  - Double check header specs for ublock and ublacklist
    - any missing fields?
    - figure out if "access time" field ruins caching
- - Implement cron scheduling
  - Integrate with nginx proxy mgr
  - Write onboarding instructions
  - Use Flask in production
+ - Refactor commenting/header choice in server.py
  - Pretty up the homepage
  - Better disguise crawler
  - See if the "r" param in the URL changes over time as a revision #
+ - Better naming for the containers(?)
 
 
 # Acknowledgements

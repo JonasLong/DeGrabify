@@ -15,8 +15,27 @@ a {
     background-color: lightgreen;
 }
 
-div {
+.inline {
+    display: inline;
+    padding: 0px;
+}
+
+p.note {
+    display: inline;
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+
+span.note {
+    width: 40%;
+    display:inline-block;
+    padding-left: 10px;
+}
+
+html div {
     padding: 13px 7px;
+    display: flex;
+    align-items: start;
 }
 
 h2 {
