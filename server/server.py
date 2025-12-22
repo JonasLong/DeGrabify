@@ -47,6 +47,10 @@ def ublock():
 def hosts():
     return as_raw(format_list(get_filter_list(), "#", "0.0.0.0 {site}"))
 
+@app.route("/plain")
+def plain():
+    return as_raw("\n".join(get_filter_list()))
+
 
     """Formats the provided text as plaintext Flask response
     """
