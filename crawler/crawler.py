@@ -34,12 +34,12 @@ def site_main():
         print("Got domains")
         store_sites(sites, db_path)
     else:
-        print("Failed to fetch domains from {site}")
+        print(f"Failed to fetch domains from {site}")
 
 def get_domains():
     resp = requests.get(site)
     if not resp.ok:
-        print(f"Error fetching list from '{site}':\n",resp.status_code)
+        print(f"Error fetching list': {resp.status_code} error")
         #print(resp.text)
         return None
     return resp.json()

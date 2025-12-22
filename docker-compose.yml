@@ -1,18 +1,18 @@
 services:
   server:
-   #image: 
-   #environment:
-   # - TZ=America/Denver
-   build:
-     dockerfile: .docker/server/Dockerfile
-     context: .
-   ports:
-     - "5000:5000"
-   #networks:
-   #  default
-   command: -d /data/sites.json -p 0
-   volumes:
-     - db:/data
+    #image: 
+    #environment:
+    # - TZ=America/Denver
+    build:
+      dockerfile: .docker/server/Dockerfile
+      context: .
+    ports:
+      - "5000:5000"
+    #networks:
+      #- default
+    command: -d /data/sites.json -p 0
+    volumes:
+      - db:/data
 
   crawler:
     #image:
