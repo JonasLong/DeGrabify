@@ -57,6 +57,7 @@
 
 # Roadmap
 - Abstract list formatting into the config/.env
+- Make a ghcr build
 - Double check header specs for ublock and ublacklist
   - any missing fields?
   - figure out if "access time" field ruins caching
