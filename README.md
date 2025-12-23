@@ -70,6 +70,7 @@
 
 # Acknowledgements
  Inspired by the following projects, check them out as well:
+ - https://github.com/TMAFE/anti-grabify
  - https://github.com/0n1cOn3/The-AntiIPGrabber-Blocklist
  - https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist
  - https://github.com/NotaInutilis/Super-SEO-Spam-Suppressor
