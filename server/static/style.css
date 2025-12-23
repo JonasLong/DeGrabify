@@ -20,6 +20,10 @@ a {
     padding: 0px;
 }
 
+.sectioninfo {
+    margin-top: 0px;
+}
+
 p.note {
     display: inline;
     margin-bottom: 0px;
