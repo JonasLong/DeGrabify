@@ -13,7 +13,7 @@
 
 # Setup
 
-  TLDR: `docker pull`, `docker compose up`. For a reverse proxy, forward the server through nginx/caddy/etc, get the forwarded URL, store it as the base domain in server.py. In the docker-compose, set the proxy level `-p`, disable the exposed port, and connect the server to your bridge network.
+  TLDR: `docker pull`, `docker compose up`. For a reverse proxy, forward the server through nginx/caddy/etc, get the forwarded URL. In the docker-compose.yml, set the base proxied domain, set the proxy level `-p`, disable the exposed port, and connect the server to your bridge network.
 
  ## Server
   - Clone this repository
@@ -35,7 +35,7 @@
   - Uncomment both `networks:` sections in the compose file. Change the `name: default` value to the name of your bridge network
     - This will ensure that the server is connected to the same [external bridge network](https://docs.docker.com/compose/how-tos/networking/) that your reverse proxy is running on.
   - Comment out the `ports:` section
-  - Change the `base_domain` option in server/server.py from `http://127.0.0.1:5000` to the address your server will be hosted on e.g. `https://degrab.example.com`. If this is set incorrectly, the "Subscribe" buttons won't work but nothing else will be affected.
+  - Change the `-s` option in server/server.py from `http://127.0.0.1:5000` to the base domain your server will be hosted on (e.g. `https://degrab.example.com`). If this is set incorrectly, the "Subscribe" buttons won't work but nothing else will be affected.
   - Configure your reverse proxy
     - scheme: `http`
     - domain: `degrabify-server-1`
@@ -56,7 +56,6 @@
  
 
 # Roadmap
-- Use environment variables for base domain and proxy level
 - Abstract list formatting into the config/.env
 - Double check header specs for ublock and ublacklist
   - any missing fields?

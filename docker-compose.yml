@@ -10,7 +10,7 @@ services:
       - "5000:5000"
     #networks:
       #- default
-    command: -d /data/sites.json -p 0
+    command: "-d /data/sites.json -p 0 -s 'http://127.0.0.1:5000'"
     volumes:
       - db:/data
 

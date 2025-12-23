@@ -16,9 +16,12 @@ parser.add_argument("-d", "--database", dest="database",
                     help="path to the database", metavar="FILE", default="sites.json")
 parser.add_argument("-p", "--proxy-lvl", dest="proxy_lvl",
                     help="level of reverse proxies for Flask ProxyFix middleware", metavar="NUM", default="0")
+parser.add_argument("-s", "--server-root", dest="root",
+                    help="server base url", metavar="URL", default="http://127.0.0.1:5000")
 args = parser.parse_args()
 app.config["db"]=args.database
 proxy_lvl = args.proxy_lvl
+root_domain = args.root.strip(" /")
 
 # TODO handle reverse proxy
 #app.wsgi_app = ProxyFix(
@@ -33,7 +36,7 @@ Domain = Query()
 @app.route("/")
 def home():
     stylesheet=app.url_for('static', filename='style.css')
-    return render_template("homepage.html", base_domain="http://127.0.0.1:5000", stylesheet=stylesheet)
+    return render_template("homepage.html", base_domain=root_domain, stylesheet=stylesheet)
 
 @app.route("/ublacklist")
 def ublacklist():
