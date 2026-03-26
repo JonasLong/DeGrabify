@@ -1,0 +1,26 @@
+services:
+  aio:
+    #image: 
+    #environment:
+    # - TZ=America/Denver
+    build:
+      dockerfile: .docker/combined/Dockerfile
+      context: .
+    ports:
+      - "5000:5000"
+    #networks:
+      #- default
+    # By default, the crawler runs a cron job once a day at noon to update the list of domains.
+    # You can change the cron, or run only once on container start
+    command: "'0 12 * * *' /data/sites.json -p 0 -s 'http://127.0.0.1:5000'"
+    #command: "once -d /data/sites.json -p 0 -s 'http://127.0.0.1:5000'" # Run once
+    volumes:
+      - db:/data
+  
+volumes:
+  db:
+
+#networks:
+#  default:
+#    name: default
+#    external: true

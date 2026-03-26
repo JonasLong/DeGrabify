@@ -14,10 +14,9 @@ echo args: "$@"
 
 pyfile="$1"
 cron="$2"
-shift 2
-args="$@"
+db="$3"
 
-command="$cron bash -l -c \"python $pyfile $args >> /var/log/crawl.log 2>&1\""
+command="$cron bash -l -c \"python $pyfile $db >> /var/log/crawl.log 2>&1\""
 
 echo command: "$command"
 # Create cronfile

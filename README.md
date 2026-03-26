@@ -24,8 +24,8 @@
     - `git clone https://github.com/JonasLong/DeGrabify`
     - `cd DeGrabify`
   - Consider using a reverse proxy as described [below](#run-behind-a-reverse-proxy)
-  - Configure the container in `docker-compose.yml`
-  - `docker compose up`
+  - Configure the container in `.docker/single-container-compose.yml`
+  - `./.docker/single-build.sh`
   - Continue to the [Client section](#client)
 
   ### Updating
