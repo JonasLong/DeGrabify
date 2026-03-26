@@ -3,6 +3,7 @@ services:
     #image: 
     #environment:
     # - TZ=America/Denver
+    restart: always
     build:
       dockerfile: .docker/server/Dockerfile
       context: .
@@ -18,6 +19,7 @@ services:
     #image:
     #environment:
     # - TZ=America/Denver
+    restart: always
     build:
       dockerfile: .docker/crawler/Dockerfile
       context: .

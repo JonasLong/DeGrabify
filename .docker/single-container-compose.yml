@@ -3,6 +3,7 @@ services:
     #image: 
     #environment:
     # - TZ=America/Denver
+    restart: always
     build:
       dockerfile: .docker/combined/Dockerfile
       context: .
