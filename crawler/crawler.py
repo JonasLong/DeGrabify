@@ -21,11 +21,8 @@ def site_main():
     parser = ArgumentParser(description="DeGrabify webcrawler")
     parser.add_argument("-d", "--database", dest="database",
                         help="path to the database", metavar="FILE", default="sites.json")
-    parser.add_argument("-c", "--cron", dest="cron",
-                        help="cronjob for the crawler (default once per day @ noon)", metavar="CRON", default="0 12 * * *")
     args = parser.parse_args()
     db_path = args.database.strip()
-    cron = args.cron
 
     # Loop fetching domain list
     print("Fetching domains...")
