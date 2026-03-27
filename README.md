@@ -1,3 +1,5 @@
+[![Filter List Update](https://github.com/JonasLong/DeGrabify/actions/workflows/gist-update.yml/badge.svg)](https://github.com/JonasLong/DeGrabify/actions/workflows/gist-update.yml)
+
 # DeGrabify
   Provides an up-to-date list of Grabify domains, for use by adblockers.\
   The goal of this project is to reduce the risk of being doxxed by unknowingly clicking on IP logger links.\
@@ -7,9 +9,16 @@
   - A client which periodically retrieves a list of domains offered by the IP Logger service Grabify
   - A webserver which provides this list of domains to adblock clients
 
-  Compatible with uBlock Origin, uBlacklist, and Hosts files\
+  Compatible with uBlock Origin / AdBlockPlus (ABP), uBlacklist, and Hosts files\
   Easily self-hosted with Docker or compatible virtualization\
   Uses Flask, Python requests, and TinyDB
+
+# Pre-built filters
+  The client/server are run daily by CI, and the updated lists are pushed to [this gist](https://gist.github.com/JonasLong/82e98e4072ba592f130edc53cdaa386d). If you only want the current filter list, this should be fine. Note that this filter list will not preserve historical changes over time, only the latest updates.
+
+  - [uBlock/ABP filter](https://gist.githubusercontent.com/JonasLong/82e98e4072ba592f130edc53cdaa386d/raw/6f2f8c27a139f9a530c92ab0b883001f956e1760/DeGrabify%2520uBlock%2520Blocklist) or [Subscribe via uBlock/ABP](https://subscribe.adblockplus.org?location=https%3A%2F%2Fgist.githubusercontent.com%2FJonasLong%2F82e98e4072ba592f130edc53cdaa386d%2Fraw%2F6f2f8c27a139f9a530c92ab0b883001f956e1760%2FDeGrabify%252520uBlock%252520Blocklist&amp;title=DeGrabify%20uBlock%20Blocklist)
+  - [uBlacklist filter](https://gist.githubusercontent.com/JonasLong/82e98e4072ba592f130edc53cdaa386d/raw/6f2f8c27a139f9a530c92ab0b883001f956e1760/DeGrabify%2520uBlacklist%2520Blocklist) or [Subscribe via uBlacklist](https://ublacklist.github.io/rulesets/subscribe?url=https://gist.githubusercontent.com/JonasLong/82e98e4072ba592f130edc53cdaa386d/raw/6f2f8c27a139f9a530c92ab0b883001f956e1760/DeGrabify%252520uBlacklist%252520Blocklist)
+  - [plain URL list](https://gist.githubusercontent.com/JonasLong/82e98e4072ba592f130edc53cdaa386d/raw/6f2f8c27a139f9a530c92ab0b883001f956e1760/DeGrabify%2520Plain%2520Domain%2520Blocklist)
 
 # Setup
 
