@@ -15,8 +15,9 @@ echo args: "$@"
 pyfile="$1"
 cron="$2"
 db="$3"
+status_dir=$(dirname "$1")
 
-command="$cron bash -l -c \"python $pyfile $db >> /var/log/crawl.log 2>&1\""
+command="$cron bash -l -c \"python $pyfile $db >> /var/log/crawl.log 2>&1; echo \\\$? > $status_dir/status.txt\""
 
 echo command: "$command"
 # Create cronfile

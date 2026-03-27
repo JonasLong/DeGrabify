@@ -14,7 +14,7 @@ services:
     # By default, the crawler runs a cron job once a day at noon to update the list of domains.
     # You can change the cron, or run only once on container start
     command: "'0 12 * * *' /data/sites.json -p 0 -s 'http://127.0.0.1:5000'"
-    #command: "once -d /data/sites.json -p 0 -s 'http://127.0.0.1:5000'" # Run once
+    #command: "once /data/sites.json -p 0 -s 'http://127.0.0.1:5000'" # Run once
     volumes:
       - db:/data
   

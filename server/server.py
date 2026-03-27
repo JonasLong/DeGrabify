@@ -38,6 +38,14 @@ def home():
     stylesheet=app.url_for('static', filename='style.css')
     return render_template("homepage.html", base_domain=root_domain, stylesheet=stylesheet)
 
+@app.route("/health")
+def health():
+    healthy=len(get_filter_list())>0
+    response = app.make_response("healthy" if healthy else "unhealthy")
+    response.status_code = 200 if healthy else 500
+    response.mimetype = "text/plain"
+    return response
+    
 @app.route("/ublacklist")
 def ublacklist():
     return as_raw(format_list(get_filter_list(), "#", "*://*.{site}/*"))

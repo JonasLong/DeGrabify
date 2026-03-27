@@ -22,7 +22,9 @@ then
     shift 1
     args="$@"
     python "$pyfile" "$args"
-
+    status=$?
+    echo $status > status.txt
+    
     # run the cronjob and tail the logfile
     echo "Starting cronjob, waiting for next run"
     cron

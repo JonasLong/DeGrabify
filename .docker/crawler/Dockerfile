@@ -6,6 +6,9 @@ ENV SCRIPT_ROOT=/var/www
 #ENV cron="0 12 * * *"
 #ENV database="sites.json"
 
+HEALTHCHECK --interval=1m --timeout=5s --retries=3 --start-period=20s --start-interval=1s \
+  CMD exit $(cat ${SCRIPT_ROOT}/status.txt)
+
 WORKDIR ${SCRIPT_ROOT}
 
 ADD crawler/crawler.py .

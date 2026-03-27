@@ -4,6 +4,9 @@ services:
     #environment:
     # - TZ=America/Denver
     restart: always
+    depends_on:
+      crawler:
+        condition: service_healthy
     build:
       dockerfile: .docker/server/Dockerfile
       context: .
