@@ -1,3 +1,4 @@
+name: Filter List Update
 on:
   schedule:
     - cron: "55 0 * * *"   
@@ -5,7 +6,7 @@ on:
 
 jobs:
   gist_update:
-    name: Pushes the filter lists to gists
+    name: Build the project, fetch filter lists, and push the filter lists to the gist
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
