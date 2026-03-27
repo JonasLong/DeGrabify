@@ -26,27 +26,7 @@ jobs:
         run: curl "http://127.0.0.1:5000/ublock" > ublock.txt
           && curl "http://127.0.0.1:5000/ublacklist" > ublacklist.txt
           && curl "http://127.0.0.1:5000/plain" > plain.txt
-
-      - name: Publish plain URLs to gist
-        # uses: Popsiclestick/gist-sync-action@88f8633178625914f2a01abf1a765f7272a580fa
-        uses: Popsiclestick/gist-sync-action@v1.2.0
-        with:
-          auth: ${{ secrets.GIST_TOKEN }}
-          gist_url: https://gist.github.com/JonasLong/82e98e4072ba592f130edc53cdaa386d
-          gist_title: DeGrabify Plain Domain Blocklist
-          gist_description: A set of filter lists that update to block the latest in-use Grabify domains. See https://github.com/JonasLong/DeGrabify for the full project.
-          github_file: plain.txt
-          
-      - name: Publish uBlacklist to gist
-        # uses: Popsiclestick/gist-sync-action@88f8633178625914f2a01abf1a765f7272a580fa
-        uses: Popsiclestick/gist-sync-action@v1.2.0
-        with:
-          auth: ${{ secrets.GIST_TOKEN }}
-          gist_url: https://gist.github.com/JonasLong/82e98e4072ba592f130edc53cdaa386d
-          gist_title: DeGrabify uBlacklist Blocklist
-          gist_description: A set of filter lists that update to block the latest in-use Grabify domains. See https://github.com/JonasLong/DeGrabify for the full project.
-          github_file: ublacklist.txt
-          
+        
       - name: Publish uBlock to gist
         # uses: Popsiclestick/gist-sync-action@88f8633178625914f2a01abf1a765f7272a580fa
         uses: Popsiclestick/gist-sync-action@v1.2.0
@@ -56,4 +36,24 @@ jobs:
           gist_title: DeGrabify uBlock Blocklist
           gist_description: A set of filter lists that update to block the latest in-use Grabify domains. See https://github.com/JonasLong/DeGrabify for the full project.
           github_file: ublock.txt
-          
+      
+      - name: Publish uBlacklist to gist
+        # uses: Popsiclestick/gist-sync-action@88f8633178625914f2a01abf1a765f7272a580fa
+        uses: Popsiclestick/gist-sync-action@v1.2.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gist_url: https://gist.github.com/JonasLong/82e98e4072ba592f130edc53cdaa386d
+          gist_title: DeGrabify uBlacklist Blocklist
+          gist_description: A set of filter lists that update to block the latest in-use Grabify domains. See https://github.com/JonasLong/DeGrabify for the full project.
+          github_file: ublacklist.txt
+      
+      - name: Publish plain URLs to gist
+        # uses: Popsiclestick/gist-sync-action@88f8633178625914f2a01abf1a765f7272a580fa
+        uses: Popsiclestick/gist-sync-action@v1.2.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gist_url: https://gist.github.com/JonasLong/82e98e4072ba592f130edc53cdaa386d
+          gist_title: DeGrabify Plain Domain Blocklist
+          gist_description: A set of filter lists that update to block the latest in-use Grabify domains. See https://github.com/JonasLong/DeGrabify for the full project.
+          github_file: plain.txt
+      
