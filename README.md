@@ -85,7 +85,6 @@
 
 # Roadmap
 - Abstract list formatting into the config/.env
-- Make a python requirements file
 - Make a ghcr build
 - Double check header specs for ublock and ublacklist
   - any missing fields?
