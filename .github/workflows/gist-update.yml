@@ -1,0 +1,30 @@
+on:
+  schedule:
+    - cron: "55 0 * * *"   
+  workflow_dispatch: 
+
+jobs:
+  gist_update:
+    name: Pushes the filter lists to gists
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Build and run docker containers
+        run: ./.docker/single-build.sh
+
+      - name: Save to file
+        run: curl "http://127.0.0.1:5000/ublock" > ublock.txt
+          && curl "http://127.0.0.1:5000/ublacklist" > ublacklist.txt
+          && curl "http://127.0.0.1:5000/plain" > plain.txt
+
+      - name: Publish to gist
+        # uses: Popsiclestick/gist-sync-action@88f8633178625914f2a01abf1a765f7272a580fa
+        uses: Popsiclestick/gist-sync-action@v1.2.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gist_url: https://gist.github.com/JonasLong/82e98e4072ba592f130edc53cdaa386d
+          gist_title: DeGrabify uBlock List
+          gist_description: Filter list that updates to the latest in-use Grabify domains. See https://github.com/JonasLong/DeGrabify for the full project
+          github_file: ublock.txt
