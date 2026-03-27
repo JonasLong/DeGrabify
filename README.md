@@ -33,15 +33,15 @@
     - `git clone https://github.com/JonasLong/DeGrabify`
     - `cd DeGrabify`
   - Consider using a reverse proxy as described [below](#run-behind-a-reverse-proxy)
-  - Configure the container in `.docker/single-container-compose.yml`
-  - `./.docker/single-build.sh`
+  - Configure the container in `.docker/single-container-compose.yml` (or `.docker/dual-container-compose.yml`)
+  - `./.docker/single-build.sh` (or `./.docker/single-build.sh`)
   - Continue to the [Client section](#client)
 
   ### Updating
   - `git fetch`
   - `git pull`
     - You may need to `git stash` if you've made changes to the config, then merge your stashed changes into main
-  - `docker compose up --build`
+  - `./.docker/single-build.sh` (or `./.docker/single-build.sh`)
 
   ### Run behind a reverse proxy
   - Change the `-p` value in the `commands` section of the server config from `0` to `1`
@@ -51,14 +51,16 @@
   - Change the `-s` option in server/server.py from `http://127.0.0.1:5000` to the base domain your server will be hosted on (e.g. `https://degrab.example.com`). If this is set incorrectly, the "Subscribe" buttons won't work but nothing else will be affected.
   - Configure your reverse proxy
     - scheme: `http`
-    - domain: `degrabify-server-1`
+    - domain: `degrabify-aio-1` (or `degrabify-server-1`)
     - port: `5000`
 
   ### Development
   - Clone this repository
     - `git clone https://github.com/JonasLong/DeGrabify`
     - `cd DeGrabify`
-  - Run like a normal docker container, but use `docker compose up --build` to rebuild any file changes
+  - Rebuild the container with `./.docker/single-build.sh` (or `./.docker/single-build.sh`)
+  - It may be helpful to convert the `db` volume to a bind mount if you need visibility into the sites.json
+  - To make changes with docker compose, reference the current compose file. E.g.: `docker compose -f .docker/dual-container-compose.yml --project-directory . logs --follow` to view compose logs when running the dual-compose container. If using single-compose it may be easier to reference the container by name instead of using docker compose 
 
   ### Client
   To install with your adblock or Hosts file:
@@ -77,7 +79,7 @@
     - `python server/server.py -d database/sites.json`
   - If you'd like crawler.py to run on a schedule, install `cron` and run
     - `chmod 700 crawler/cron-install.sh`
-    - `./crawler/cron-install.sh $(pwd)/crawler.py '0 12 * * *' -d $(pwd)/database/sites.json`
+    - `./crawler/cron-install.sh $(pwd)/crawler.py '0 12 * * *' $(pwd)/database/sites.json`
       - The cronjob will be written to `/etc/cron.d/crawl-cron`. Logs will be saved in `/var/log/crawl.log`.
     - `cron`
   - Open `http://127.0.0.1:5000` in a browser
