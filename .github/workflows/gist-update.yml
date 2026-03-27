@@ -14,6 +14,14 @@ jobs:
       - name: Build and run docker containers
         run: ./.docker/single-build.sh
 
+      - name: Wait Docker-Compose Healthy
+        # uses: thegabriele97/dockercompose-health-action@d1003e3654befbe25146b613b823e39d5002e067
+        uses: thegabriele97/dockercompose-health-action@v2024.04.19.0
+        with:
+          filename: dual-container-compose.yml
+          timeout: 1m
+          workdir: .docker/
+
       - name: Save to file
         run: curl "http://127.0.0.1:5000/ublock" > ublock.txt
           && curl "http://127.0.0.1:5000/ublacklist" > ublacklist.txt
