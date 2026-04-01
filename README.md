@@ -24,7 +24,7 @@
 
   You can run this project in [Docker](#docker) or [locally](#run-locally-no-docker). Docker is recommended.
 
-  TLDR: `docker pull`, `docker compose up`. For a reverse proxy, forward the server through nginx/caddy/etc, get the forwarded URL. In the docker-compose.yml, set the base proxied domain, set the proxy level `-p`, disable the exposed port, and connect the server to your bridge network.
+  TLDR: `git clone`, edit `.docker/single-container-compose.yml`, `./.docker/single-build.sh`. For a reverse proxy, forward the server through nginx/caddy/etc, get the forwarded URL. In the compose file, set the base proxied domain, set the proxy level `-p`, disable the exposed port, and connect the server to your bridge network.
 
 ## Docker
 
@@ -34,7 +34,7 @@
     - `cd DeGrabify`
   - Consider using a reverse proxy as described [below](#run-behind-a-reverse-proxy)
   - Configure the container in `.docker/single-container-compose.yml` (or `.docker/dual-container-compose.yml`)
-  - `./.docker/single-build.sh` (or `./.docker/single-build.sh`)
+  - `./.docker/single-build.sh` (or `./.docker/dual-build.sh`)
   - Continue to the [Client section](#client)
 
   ### Updating
